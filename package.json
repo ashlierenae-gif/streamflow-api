@@ -1,0 +1,25 @@
+{
+  "name": "streamflow-api",
+  "version": "1.0.0",
+  "description": "REST API for managing Twitch, YouTube, and Instagram content tasks.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashlierenae-gif/streamflow-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/ashlierenae-gif/streamflow-api/issues"
+  },
+  "homepage": "https://github.com/ashlierenae-gif/streamflow-api#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "uuid": "^14.0.0"
+  }
+}
