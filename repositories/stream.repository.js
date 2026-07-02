@@ -1,24 +1,26 @@
-let STREAMS =[
+import { database } from "../utils/database.js";
+const collection = () => database.db.collection("streams");
+let STREAMS = [
     {
-        id:"1",
+        id: "1",
         title: "Design Twitch Banner",
-        description:"Create banner for Twitch page",
+        description: "Create banner for Twitch page",
         completed: false,
         color: "blue",
         hexColor: "#0000ff"
     },
     {
-         id:"2",
+        id: "2",
         title: "Edit Stream Highlights",
-        description:"Create YouTube shorts from latest stream",
+        description: "Create YouTube shorts from latest stream",
         completed: false,
         color: "green",
         hexColor: "#00ff00"
     },
     {
-          id:"3",
+        id: "3",
         title: "Schedule Instagram Post",
-        description:"Post content from latest stream",
+        description: "Post content from latest stream",
         completed: false,
         color: "red",
         hexColor: "#ff0000"
@@ -27,58 +29,59 @@ let STREAMS =[
 
 export class StreamRepository {
     static getStreams = () => {
-        return STREAMS;
+        return collection().find({}).toArray();
     };
 
     static getStreamById = (id) => {
-        return STREAMS.find(stream => stream.id === id);
+        return collection().findOne({ id: id });
+
     };
 
-    static createStream = (newStream) => {
+    static createStream = async (newStream) => {
         console.log(newStream);
 
-        STREAMS.push(newStream);
+        await collection().insertOne(newStream);
 
         return newStream;
     };
 
-    static replaceStream = (id, replaceStream) => {
-        const index = STREAMS.findIndex(stream => stream.id === id);
-
-        if (index === -1) {
-            return null;
-        }
-
+    static replaceStream = async (id, replaceStream) => {
         console.log(replaceStream);
 
-        STREAMS[index] = replaceStream;
+        const result = await collection().replaceOne(
+            { id: id },
+            replaceStream
+        );
 
-        return replaceStream;
-    };
-
-    static updateStream = (id, updateStream) => {
-        const stream = STREAMS.find(stream => stream.id === id);
-
-        if (!stream) {
+        if (result.matchedCount === 0) {
             return null;
         }
 
-        Object.assign(stream, updateStream);
+        return replaceStream;
 
-        console.log(stream);
-
-        return stream;
     };
 
-    static deleteStream = (id) => {
-        const index = STREAMS.findIndex(stream => stream.id === id);
+    static updateStream = async (id, updateStream) => {
+        console.log(updateStream);
 
-        if (index === -1) {
-            return false;
+        const result = await collection().updateOne(
+            { id: id },
+            {
+                $set: updateStream
+            }
+        );
+        if (result.matchedCount === 0) {
+            return null;
         }
 
-        STREAMS.splice(index, 1);
+        return collection().findOne({ id: id });
+    };
 
-        return true;
+    static deleteStream = async (id) => {
+        const result = await collection().deleteOne({
+            id: id
+        });
+
+        return result.deletedCount > 0
     };
 }

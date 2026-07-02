@@ -1,4 +1,4 @@
-import {v4 as uuid} from "uuid";
+import { v4 as uuid } from "uuid";
 import { StreamRepository } from "../repositories/stream.repository.js";
 
 export class StreamService {

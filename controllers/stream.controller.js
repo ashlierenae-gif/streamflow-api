@@ -25,44 +25,44 @@ export class StreamController {
         res.status(201).json(result);
     };
     static replaceStream = async (req, res) => {
-    const id = req.params.id;
+        const id = req.params.id;
 
-    const result = await StreamService.replaceStream(id, req.body);
+        const result = await StreamService.replaceStream(id, req.body);
 
-    if (result) {
-        res.status(200).json(result);
-    } else {
-        res.status(404).json({
-            message: "Stream task not found"
-        });
-    }
-};
+        if (result) {
+            res.status(200).json(result);
+        } else {
+            res.status(404).json({
+                message: "Stream task not found"
+            });
+        }
+    };
 
-static updateStream = async (req, res) => {
-    const id = req.params.id;
+    static updateStream = async (req, res) => {
+        const id = req.params.id;
 
-    const result = await StreamService.updateStream(id, req.body);
+        const result = await StreamService.updateStream(id, req.body);
 
-    if (result) {
-        res.status(200).json(result);
-    } else {
-        res.status(404).json({
-            message: "Stream task not found"
-        });
-    }
-};
+        if (result) {
+            res.status(200).json(result);
+        } else {
+            res.status(404).json({
+                message: "Stream task not found"
+            });
+        }
+    };
 
-static deleteStream = async (req, res) => {
-    const id = req.params.id;
+    static deleteStream = async (req, res) => {
+        const id = req.params.id;
 
-    const result = await StreamService.deleteStream(id);
+        const result = await StreamService.deleteStream(id);
 
-    if (result) {
-        res.status(204).send();
-    } else {
-        res.status(404).json({
-            message: "Stream task not found"
-        });
-    }
-};
+        if (result) {
+            res.status(204).send();
+        } else {
+            res.status(404).json({
+                message: "Stream task not found"
+            });
+        }
+    };
 }

@@ -1,0 +1,9 @@
+{
+    "appName": "StreamFlow API",
+    "mongo":{
+        "url": "mongodb://127.0.0.1:27017",
+        "database": "streamflow-api",
+        "miniPoolSize": 2,
+        "maxPoolSize": 10
+    }
+}
